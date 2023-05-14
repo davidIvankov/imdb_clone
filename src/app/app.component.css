@@ -1,0 +1,12 @@
+.invisible {
+    display: none;
+}
+
+.visible {
+    display: block;
+    position: fixed;
+    top: 2vh;
+    width: 50vw;
+    height: 2vh;
+    background-color: aqua;
+}

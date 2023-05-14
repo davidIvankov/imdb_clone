@@ -1,1 +1,9 @@
-<p>movie-list-item works!</p>
+<a [href]="detailsMoviePath">
+    <img [src]="imgPath" [alt]="imgAlt">
+</a>
+<p>{{index}}.</p>
+<a [href]="detailsMoviePath">
+    <h3>{{movie.title}}</h3>
+</a>
+<p>({{movie.release_date.slice(0,4)}})</p>
+<p>{{movie.vote}}</p>
