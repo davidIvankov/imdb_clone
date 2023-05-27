@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  @Input() greyClass: boolean;
+  @Output() toggleMenu = new EventEmitter<boolean>();
+  onToggleMenu(){
+    if (this.greyClass){
+    this.toggleMenu.emit(false)  
+    } else {
+      this.toggleMenu.emit(true)
+    }
+    this.greyClass = !this.greyClass
+  }
 
 }

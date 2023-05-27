@@ -1,4 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Output, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,10 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @Output() greyClass: boolean = false;
   title = 'imdb_clone';
   scrollToTop: boolean = false
+  
 
   @HostListener("window:scroll", [])
   onScroll(): void {
@@ -20,6 +23,9 @@ export class AppComponent {
   onGoBack(){
     window.scroll({ top:0 })
            
+  }
+  grey(event: boolean){
+    this.greyClass = event;
   }
   
 }

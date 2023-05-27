@@ -1,9 +1,18 @@
-<a [href]="detailsMoviePath">
-    <img [src]="imgPath" [alt]="imgAlt">
-</a>
-<p>{{index}}.</p>
-<a [href]="detailsMoviePath">
-    <h3>{{movie.title}}</h3>
-</a>
-<p>({{movie.release_date.slice(0,4)}})</p>
-<p>{{movie.vote}}</p>
+<div class="item">
+    <div class="close">
+        <a [href]="detailsMoviePath">
+            <img [src]="imgPath" [alt]="imgAlt">
+        </a>
+        <div class="info">
+            <p>{{index}}.</p>
+            <a [href]="detailsMoviePath">
+                <h3>{{movie.title}}</h3>
+            </a>
+            <p>({{movie.release_date.slice(0,4)}})</p>
+        </div>
+    </div>
+    <div class="rating">
+        <i class="fa fa-star"></i>
+        <p>{{movie.vote}}</p>
+    </div>
+</div>

@@ -1,12 +1,37 @@
 .invisible {
     display: none;
 }
+.menu {
+    transition: transform .2s ease-in-out;
+    position: absolute;
+    z-index: 1;
+    height: 103vh;
+    transform: translateY(-106vh);
+}
+.up {
+    height: .9vw;
+    transform: rotate(90deg);
+}
+
+.active {
+    transform: translateY(-3vh);
+}
 
 .visible {
     display: block;
     position: fixed;
-    top: 2vh;
-    width: 50vw;
-    height: 2vh;
-    background-color: aqua;
+    top: 5vh;
+    display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 25px;
+        border: none;
+        height: 2vw;
+        width: 9vw;
+        font-size: .9rem;
+        left: 41vw;
 }
+.grey {
+    filter: grayscale(1);
+}
+

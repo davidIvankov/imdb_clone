@@ -7,6 +7,9 @@ import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieListItemComponent } from './movie-list/movie-list-item/movie-list-item.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MovieComponent } from './movie/movie.component';
+import { SafePipe } from './safe.pipe';
+import { MenuComponent } from './header/menu/menu.component';
+
 
 const appRoutes: Routes = [
 {path:'', component: MovieListComponent},
@@ -18,12 +21,15 @@ const appRoutes: Routes = [
     HeaderComponent,
     MovieListComponent,
     MovieListItemComponent,
-    MovieComponent
+    MovieComponent,
+    SafePipe,
+    MenuComponent,
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]

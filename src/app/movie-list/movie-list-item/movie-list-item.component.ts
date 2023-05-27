@@ -12,6 +12,7 @@ export class MovieListItemComponent implements OnInit {
   imgPath: string;
   imgAlt: string;
   detailsMoviePath: string;
+
   ngOnInit(): void {
     this.imgPath= `https://image.tmdb.org/t/p/w500${this.movie.poster}`
     this.imgAlt= `${this.movie.title} poster`

@@ -1,6 +1,38 @@
+<main>
+    <section class="left">
+        <div class="title">
+            <h2>IMDb Charts</h2>
+            <div>
+                <h1>IMDb Top Rated Movies</h1>
+                <p>IMDb Top as rated by regular IMDb voters.</p>
+                <hr class="lihr">
+            </div>
+        </div>
+        <div class="desc">
+            <p>Rank & Title</p>
+            <div>
+                <p>IMDb Rating</p>
+            </div>
 
-    <app-movie-list-item 
-        *ngFor="let movie of moviesList; let i = index"  
-        [movie]="movie"
-        [index]="i + 1"
-    ></app-movie-list-item>
+        </div>
+        <ul>
+            <app-movie-list-item 
+                *ngFor="let movie of moviesList; let i = index"  
+                [movie]="movie"
+                [index]="i + 1"
+            ></app-movie-list-item>
+        </ul>
+    </section>
+    <section class="right" style="height: 100%;">
+        <div class="inner">
+            <hr>
+            <h2>IMDb Charts</h2>
+            <nav>
+                <a href="">Top Rated Movies</a>
+            </nav>
+            <hr>
+            
+        </div>
+        <div class="filler" *ngFor="let item of moviesList"></div>
+    </section>
+</main>
