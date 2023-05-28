@@ -10,7 +10,12 @@ button {
     cursor: pointer;
 }
 
+.logo {
+    height: 8vw;
+    fill: #DBA506;
+    margin-left: 15vw;
 
+}
 a {
     text-decoration: none;
 }
