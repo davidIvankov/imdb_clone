@@ -1,12 +1,12 @@
 <div class="element">
-    <div class="bg" *ngIf="height" [ngStyle]="{background: 'url('+ posterSrc +')',height:height + 'px'}"></div>
-    <main *ngIf="infoObject" #myReference>
+    <div class="bg" *ngIf="height" [ngStyle]="{background: 'url('+ movieDetails.posterUrl +')',height:height + 'px'}"></div>
+    <main *ngIf="movieDetails" #myReference>
         <div class="initInfo">
             <div class="header">
-                <h2>{{ infoObject['title'] }}</h2>
+                <h2>{{ movieDetails.title }}</h2>
                 <div class="little">
-                    <h3>{{infoObject['release_date'].slice(0,4)}}</h3><span>&#183;</span>
-                    <h3>{{duration}}</h3>
+                    <h3>{{movieDetails.releaseDate}}</h3><span>&#183;</span>
+                    <h3>{{movieDetails.durationHours}}</h3>
                 </div>
             </div>
             <div class="stats">
@@ -15,38 +15,41 @@
                     <div class="grid">
                         <i class="fa fa-star"></i>
                         <div class="flex">
-                            <h4><span>{{infoObject['vote_average']}}</span>/10</h4>
-                            <h4>{{vote_count}}</h4>
+                            <h4><span>{{movieDetails.vote}}</span>/10</h4>
+                            <h4>{{movieDetails.voteCountDisplay}}</h4>
                         </div>
                     </div>
                 </div>
                 <div class="pop">
                     <h3>POPULARTITY</h3>
-                    <h4 class="bigg">{{infoObject['popularity']}}</h4>
+                    <h4 class="bigg">{{movieDetails.popularity}}</h4>
                 </div>
             </div>
         </div>
         <div class="medias">
-            <img [src]="posterSrc" [alt]="posterAlt">
-            <iframe width="420" height="315" [src]="videoUrl | safe">
+            <img [src]="movieDetails.posterUrl" [alt]="movieDetails.title + 'poster'">
+            <iframe width="420" height="315" [src]="movieDetails.trailer | safe" *ngIf="movieDetails.trailer; else AltImg">
             </iframe>
+            <ng-template #AltImg>
+                <img src="https://i.ytimg.com/vi/UH1ThWZ9hXU/hqdefault.jpg">
+            </ng-template>
         </div>
         <div class="genres">
-            <h4 *ngFor="let genre of infoObject['genres']">{{ genre['name'] }}</h4>
+            <h4 *ngFor="let genre of movieDetails.genres">{{ genre['name'] }}</h4>
         </div>
-        <p class="text">{{infoObject['overview']}}</p>
+        <p class="text">{{movieDetails.overview}}</p>
         <hr>
         <div class="diri">
             <h3>Director</h3>
-            <h4 class="blue">{{director}}</h4>
+            <h4 class="blue">{{movieDetails.director}}</h4>
         </div>
         <hr>
         <div class="diri">
-            <h3 *ngIf="writers.length > 1; else writer" class="text">Writers</h3>
+            <h3 *ngIf="movieDetails.writers.length > 1; else writer" class="text">Writers</h3>
             <ng-template #writer>
                 <h3 class="text">Writer</h3>
             </ng-template>
-            <div class="container" *ngFor="let writer of writers; let i = index">
+            <div class="container" *ngFor="let writer of movieDetails.writers; let i = index">
                 <span *ngIf="i !== 0;">&#183;</span>
                 <h4>{{ writer }}</h4>
             </div>
@@ -54,7 +57,7 @@
         <hr>
         <div class="diri">
             <h3 class="text">Actors</h3>
-            <div *ngFor="let actor of actors;let i = index" class="container">
+            <div *ngFor="let actor of movieDetails.actors;let i = index" class="container">
                 <span *ngIf="i !== 0;">&#183;</span>
                 <h4>{{ actor }}</h4>
             </div>

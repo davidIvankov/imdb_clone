@@ -1,20 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component,Input} from '@angular/core';
+import { NavigationService } from '../shared/navigation.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent {
   @Input() greyClass: boolean;
-  @Output() toggleMenu = new EventEmitter<boolean>();
+  
+  constructor(private navigationService: NavigationService) {}
+
   onToggleMenu(){
-    if (this.greyClass){
-    this.toggleMenu.emit(false)  
-    } else {
-      this.toggleMenu.emit(true)
-    }
-    this.greyClass = !this.greyClass
+    this.navigationService.toggleMenu();
   }
 
 }

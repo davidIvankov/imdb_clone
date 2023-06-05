@@ -1,4 +1,6 @@
-import { Component, HostListener, Output, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { NavigationService } from './shared/navigation.service';
+import { ViewPortService } from './shared/viewport.service';
 
 
 @Component({
@@ -6,10 +8,31 @@ import { Component, HostListener, Output, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  @Output() greyClass: boolean = false;
+export class AppComponent implements OnInit {
+ activeMenu: boolean;
   title = 'imdb_clone';
-  scrollToTop: boolean = false
+  scrollToTop: boolean = false;
+  height: any= 'auto';
+
+  constructor(private navigationService: NavigationService, private viewportService: ViewPortService) {}
+
+  ngOnInit(): void {
+    this.navigationService.menuActiveChange
+                          .subscribe(
+                            (activeMenu: boolean)=>{
+                              this.activeMenu = activeMenu;
+                            }
+                          )
+    this.viewportService.alertingMenu
+                        .subscribe(
+                          (height: number)=>{
+                            this.height = height
+                          }
+                        )
+    this.activeMenu = this.navigationService.menuActive;
+
+    
+  }
   
 
   @HostListener("window:scroll", [])
@@ -23,9 +46,6 @@ export class AppComponent {
   onGoBack(){
     window.scroll({ top:0 })
            
-  }
-  grey(event: boolean){
-    this.greyClass = event;
   }
   
 }

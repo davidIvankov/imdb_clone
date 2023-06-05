@@ -1,8 +1,8 @@
-<div [ngClass]="{active: greyClass}" class="menu">
-<app-menu [greyClass]="greyClass" (toggleMenu)="grey($event)"></app-menu>
+<div [ngClass]="{active: activeMenu}" class="menu">
+<app-menu [greyClass]="activeMenu"></app-menu>
 </div>
-<div  [ngClass]="{grey: greyClass}">
-<app-header [greyClass]="greyClass" (toggleMenu)="grey($event)"></app-header>
+<div  [ngClass]="{grey: activeMenu}" [ngStyle]="{height: activeMenu ? height +'px' : 'auto'}">
+<app-header></app-header>
 <button  (click)="onGoBack()" [ngClass]="{visible: scrollToTop}" class="invisible back">
     <svg class="up" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 384 512">

@@ -1,14 +1,14 @@
+import { DataTransform } from "../shared/dataTransforming.service";
+
 export class Movie {
-    public title: string;
-    public vote: number; 
-    public release_date: string;
-    public poster: string;
-    public id: number;
-    constructor( title: string, vote: number, release_date: string, poster: string, id: number) {
-        this.title = title;
-        this.vote = vote;
-        this.release_date =release_date;
-        this.poster = poster;
-        this.id = id
+    private transform = new DataTransform()
+    constructor(
+        public title: string,
+        public vote: number,
+        public date: string,
+        private poster: string,
+        public id: number) {
     }
+    public posterUrl = this.transform.getPosterUrl(this.poster) 
+    public releaseDate = this.transform.getYear(this.date)
 }

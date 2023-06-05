@@ -1,5 +1,5 @@
 <main>
-    <section class="left">
+    <section class="left" #left>
         <div class="title">
             <h2>IMDb Charts</h2>
             <div>
@@ -15,15 +15,15 @@
             </div>
 
         </div>
-        <ul>
+        <ul class="tracked">
             <app-movie-list-item 
-                *ngFor="let movie of moviesList; let i = index"  
+                *ngFor="let movie of movies; let i = index"  
                 [movie]="movie"
                 [index]="i + 1"
             ></app-movie-list-item>
         </ul>
     </section>
-    <section class="right" style="height: 100%;">
+    <section class="right" [ngStyle]="{height: height ? height + 'px': '100vh'}">
         <div class="inner">
             <hr>
             <h2>IMDb Charts</h2>
@@ -31,8 +31,6 @@
                 <a href="">Top Rated Movies</a>
             </nav>
             <hr>
-            
         </div>
-        <div class="filler" *ngFor="let item of moviesList"></div>
     </section>
 </main>
