@@ -23,7 +23,7 @@ export class DataTransform {
   }
 
   getYear(date: string){
-    return date.slice(0,1)
+    return date.slice(0,4)
   }
 
    getTrailer(obj: object[]){

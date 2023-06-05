@@ -10,5 +10,5 @@ export class Movie {
         public id: number) {
     }
     public posterUrl = this.transform.getPosterUrl(this.poster) 
-    public releaseDate = this.transform.getYear(this.date)
+    public releaseDate: string= this.transform.getYear(this.date)
 }
