@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { NavigationService } from './shared/navigation.service';
-import { ViewPortService } from './shared/viewport.service';
+import { NavigationService } from './shared/navigation-service.service';
+import { ViewportService } from './shared/viewport-service.service';
 
 
 @Component({
@@ -9,18 +9,18 @@ import { ViewPortService } from './shared/viewport.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
- activeMenu: boolean;
+ shouldActiveMenu: boolean;
   title = 'imdb_clone';
-  scrollToTop: boolean = false;
+  shouldScrollToTop: boolean = false;
   height: any= 'auto';
 
-  constructor(private navigationService: NavigationService, private viewportService: ViewPortService) {}
+  constructor(private navigationService: NavigationService, private viewportService: ViewportService) {}
 
   ngOnInit(): void {
     this.navigationService.menuActiveChange
                           .subscribe(
                             (activeMenu: boolean)=>{
-                              this.activeMenu = activeMenu;
+                              this.shouldActiveMenu = activeMenu;
                             }
                           )
     this.viewportService.alertingMenu
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
                             this.height = height
                           }
                         )
-    this.activeMenu = this.navigationService.menuActive;
+    this.shouldActiveMenu = this.navigationService.menuActive;
 
     
   }
@@ -38,9 +38,9 @@ export class AppComponent implements OnInit {
   @HostListener("window:scroll", [])
   onScroll(): void {
     if (visualViewport.height < window.scrollY) {
-      this.scrollToTop = true
+      this.shouldScrollToTop = true
     } else {
-      this.scrollToTop = false
+      this.shouldScrollToTop = false
     }
   } 
   onGoBack(){

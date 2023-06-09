@@ -1,14 +1,14 @@
 <div class="item">
     <div class="close">
         <a [href]="'movie/'+ movie.id">
-            <img [src]="movie.posterUrl" [alt]="movie.title + ' poster'">
+            <img [src]="movie.poster" [alt]="movie.title + ' poster'">
         </a>
         <div class="info">
             <p>{{index}}.</p>
             <a [href]="'movie/'+ movie.id">
                 <h3>{{movie.title}}</h3>
             </a>
-            <p>({{movie.releaseDate}})</p>
+            <p>({{movie.date}})</p>
         </div>
     </div>
     <div class="rating">

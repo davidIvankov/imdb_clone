@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, ElementRef } from "@angular/core";
  @Injectable({providedIn: 'root'})
- export class ViewPortService {
+ export class ViewportService {
     alertingMenu= new EventEmitter<number>();
    private menuHeigth: number;
     setMenuHeight(element: ElementRef) {

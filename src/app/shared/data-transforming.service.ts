@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable({providedIn: 'root'})
 
-export class DataTransform {
+export class DataTransforming {
     getPosterUrl(poster: string) {
         return `https://image.tmdb.org/t/p/w500${poster}`
     }

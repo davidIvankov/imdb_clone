@@ -1,12 +1,12 @@
 <div class="element">
-    <div class="bg" *ngIf="height" [ngStyle]="{background: 'url('+ movieDetails.posterUrl +')',height:height + 'px'}"></div>
+    <div class="bg" *ngIf="height" [ngStyle]="{background: 'url('+ movieDetails.poster +')',height:height + 'px'}"></div>
     <main *ngIf="movieDetails" #myReference>
         <div class="initInfo">
             <div class="header">
                 <h2>{{ movieDetails.title }}</h2>
                 <div class="little">
-                    <h3>{{movieDetails.releaseDate}}</h3><span>&#183;</span>
-                    <h3>{{movieDetails.durationHours}}</h3>
+                    <h3>{{movieDetails.date}}</h3><span>&#183;</span>
+                    <h3>{{movieDetails.duration}}</h3>
                 </div>
             </div>
             <div class="stats">
@@ -16,7 +16,7 @@
                         <i class="fa fa-star"></i>
                         <div class="flex">
                             <h4><span>{{movieDetails.vote}}</span>/10</h4>
-                            <h4>{{movieDetails.voteCountDisplay}}</h4>
+                            <h4>{{movieDetails.voteCount}}</h4>
                         </div>
                     </div>
                 </div>
@@ -27,8 +27,13 @@
             </div>
         </div>
         <div class="medias">
-            <img [src]="movieDetails.posterUrl" [alt]="movieDetails.title + 'poster'">
-            <iframe width="420" height="315" [src]="movieDetails.trailer | safe" *ngIf="movieDetails.trailer; else AltImg">
+            <img [src]="movieDetails.poster" [alt]="movieDetails.title + 'poster'">
+            <iframe 
+                width="420" 
+                height="315" 
+                [src]="movieDetails.videoUrl | safe" 
+                *ngIf="movieDetails.videoUrl; else AltImg"
+            >
             </iframe>
             <ng-template #AltImg>
                 <img src="https://i.ytimg.com/vi/UH1ThWZ9hXU/hqdefault.jpg">

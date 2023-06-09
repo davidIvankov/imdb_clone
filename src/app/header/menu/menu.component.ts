@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ElementRef, EventEmitter, OnInit, AfterViewInit} from '@angular/core';
-import { NavigationService } from 'src/app/shared/navigation.service';
-import { ViewPortService } from 'src/app/shared/viewport.service';
+import { NavigationService } from 'src/app/shared/navigation-service.service';
+import { ViewportService } from 'src/app/shared/viewport-service.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,11 +9,11 @@ import { ViewPortService } from 'src/app/shared/viewport.service';
 })
 
 export class MenuComponent implements AfterViewInit{
-  @Input() greyClass: boolean;
+  @Input() isActive: boolean;
   @ViewChild('menu')
    myReference: ElementRef;
 
-  constructor(private navigationService: NavigationService,private viewPortService: ViewPortService) {}
+  constructor(private navigationService: NavigationService,private viewPortService: ViewportService) {}
 
   ngAfterViewInit(): void {
     this.viewPortService.setMenuHeight(this.myReference);

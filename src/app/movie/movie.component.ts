@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
-import { MovieDetails } from './movieDetailes.model';
-import { MoviesService } from '../shared/movies.service';
+import { MovieDetails } from './movie-detailes.model';
+import { MoviesService } from '../shared/movies-service.service';
+import { DataTransforming } from '../shared/data-transforming.service';
 
 
 @Component({
@@ -14,17 +14,29 @@ import { MoviesService } from '../shared/movies.service';
 export class MovieComponent implements OnInit, AfterViewInit{
   id: number;
   height: number;
-  movieDetails: MovieDetails;
+  movieDetails:MovieDetails;
+  releaseDate: string;
+  posterUrl: string;
+  durationHours: string;
+  voteCountDisplay: string;
+  trailer: string;
+  director: string;
+  writers: string[];
+  actors: string[];
   private changes: MutationObserver;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private titleService: Title, private movieService: MoviesService){}
+  constructor(private route: ActivatedRoute,  
+              private titleService: Title, 
+              private movieService: MoviesService,
+              private transform: DataTransforming){}
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.movieService.setDetailedMovie(this.id)
-    this.movieService.movieDetails
-                     .subscribe(
-                      (movie: MovieDetails)=> this.movieDetails = movie
-                     )
+
+      this.id = this.route.snapshot.params['id'];
+
+   this.movieService.getDetailedMovie(this.id).subscribe(data=> {
+       this.movieDetails = data                          
+              })
+   
   }
   ngAfterViewInit(): void {
     this.changes = new MutationObserver(()=>{

@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef, AfterViewInit, Output } from '@angular/core';
-import { MoviesService } from '../shared/movies.service';
+import { MoviesService } from '../shared/movies-service.service';
 import { Movie } from './movie.model';
 
 @Component({
@@ -18,14 +18,9 @@ export class MovieListComponent implements OnInit,AfterViewInit {
  
   constructor(private movieService: MoviesService) {}
 
-ngOnInit(): void {
-  this.movieService.setMovies(this.page);
-  this.movieService.movieEmmiter
-                   .subscribe(
-                    (movies: Movie[])=>{
-                      this.movies = movies;
-                    }
-                   )
+ngOnInit() {
+this.movieService.getMovies(this.page).subscribe(res=>this.movies= res);
+  
 }
 
 ngAfterViewInit(): void {
@@ -45,7 +40,8 @@ ngAfterViewInit(): void {
   onScroll(): void {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight ) {
       this.page++;
-      this.movieService.setMovies(this.page)
+      this.movieService.getMovies(this.page)
+                       .subscribe(res=>this.movies=res)
     } 
   }
 
