@@ -1,24 +1,26 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, EventEmitter, OnInit, AfterViewInit} from '@angular/core';
+import { NavigationService } from 'src/app/shared/navigation-service.service';
+import { ViewportService } from 'src/app/shared/viewport-service.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
-  @Input() greyClass: boolean;
-  @Output() toggleMenu = new EventEmitter<boolean>();
 
+export class MenuComponent implements AfterViewInit{
+  @Input() isActive: boolean;
+  @ViewChild('menu')
+   myReference: ElementRef;
+
+  constructor(private navigationService: NavigationService,private viewPortService: ViewportService) {}
+
+  ngAfterViewInit(): void {
+    this.viewPortService.setMenuHeight(this.myReference);
+  }
 
   onToggleMenu(){
-    console.log(this.greyClass)
-    if (this.greyClass){
-      this.toggleMenu.emit(false)
-    } else {
-      this.toggleMenu.emit(true)
-    }
-    this.greyClass = !this.greyClass
-
+    this.navigationService.toggleMenu();
   }
 
 }

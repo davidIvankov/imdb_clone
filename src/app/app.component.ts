@@ -1,4 +1,6 @@
-import { Component, HostListener, Output, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { NavigationService } from './shared/navigation-service.service';
+import { ViewportService } from './shared/viewport-service.service';
 
 
 @Component({
@@ -6,26 +8,44 @@ import { Component, HostListener, Output, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  @Output() greyClass: boolean = false;
+export class AppComponent implements OnInit {
+ shouldActiveMenu: boolean;
   title = 'imdb_clone';
-  scrollToTop: boolean = false
+  shouldScrollToTop: boolean = false;
+  height: any= 'auto';
+
+  constructor(private navigationService: NavigationService, private viewportService: ViewportService) {}
+
+  ngOnInit(): void {
+    this.navigationService.menuActiveChange
+                          .subscribe(
+                            (activeMenu: boolean)=>{
+                              this.shouldActiveMenu = activeMenu;
+                            }
+                          )
+    this.viewportService.alertingMenu
+                        .subscribe(
+                          (height: number)=>{
+                            this.height = height
+                          }
+                        )
+    this.shouldActiveMenu = this.navigationService.menuActive;
+
+    
+  }
   
 
   @HostListener("window:scroll", [])
   onScroll(): void {
     if (visualViewport.height < window.scrollY) {
-      this.scrollToTop = true
+      this.shouldScrollToTop = true
     } else {
-      this.scrollToTop = false
+      this.shouldScrollToTop = false
     }
   } 
   onGoBack(){
     window.scroll({ top:0 })
            
-  }
-  grey(event: boolean){
-    this.greyClass = event;
   }
   
 }

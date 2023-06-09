@@ -33,5 +33,6 @@
 }
 .grey {
     filter: grayscale(1);
+    overflow: hidden;
 }
 
