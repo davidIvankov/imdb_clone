@@ -1,19 +1,17 @@
-import { Component,Input} from '@angular/core';
-import { NavigationService } from '../shared/navigation-service.service';
+import { Component, Input } from '@angular/core';
+import { NavigationService } from '../../../shared/services/navigation-service.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
-
 export class HeaderComponent {
   @Input() greyClass: boolean;
-  
+
   constructor(private navigationService: NavigationService) {}
 
-  onToggleMenu(){
+  onToggleMenu() {
     this.navigationService.toggleMenu();
   }
-
 }
