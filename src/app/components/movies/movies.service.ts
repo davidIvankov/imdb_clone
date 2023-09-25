@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movie } from './movie-list/movie.model';
 import { MovieDetails } from './movie-details/movie-detailes.model';
 import { DataTransforming } from '../../shared/services/data-transforming.service';
 import { map } from 'rxjs/operators';
 
+const apiKey: string = 'c3aceedbcd41c21bcb8db8c3d4adb97b';
+
 @Injectable({ providedIn: 'root' })
 export class MoviesService {
-  url: string =
-    'https://api.themoviedb.org/3//movie/top_rated?api_key=c3aceedbcd41c21bcb8db8c3d4adb97b';
   private moviesList: Movie[] = [];
-  private movieDetails: MovieDetails;
 
   constructor(private http: HttpClient, private transform: DataTransforming) {}
   getMovies(page: number) {
-    return this.http.get(`${this.url}&page=${page}`).pipe(
-      map((res) => {
-        const list: [] = res['results'];
-        for (let i = 0; i < list.length; i++) {
-          this.moviesList.push(this.transformValues(list, i));
-        }
-        return this.moviesList;
+    return this.http
+      .get<Movie[]>('https://api.themoviedb.org/3//movie/top_rated', {
+        params: new HttpParams().set('api_key', apiKey).set('page', page),
       })
-    );
+      .pipe(
+        map((res) => {
+          const list: [] = res['results'];
+          for (let i = 0; i < list.length; i++) {
+            this.moviesList.push(this.transformValues(list, i));
+          }
+          return this.moviesList;
+        })
+      );
   }
   private transformValues(res: object, i: number): Movie {
     return new Movie(
@@ -35,9 +38,11 @@ export class MoviesService {
   }
   getDetailedMovie(id: number) {
     return this.http
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=c3aceedbcd41c21bcb8db8c3d4adb97b&append_to_response=videos,images,credits`
-      )
+      .get(`https://api.themoviedb.org/3/movie/${id}`, {
+        params: new HttpParams()
+          .set('api_key', apiKey)
+          .set('append_to_response', 'videos,images,credits'),
+      })
       .pipe(
         map((res) => {
           return this.transformDetailedValues(res);

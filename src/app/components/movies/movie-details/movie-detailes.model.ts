@@ -1,7 +1,4 @@
-import { DataTransforming } from '../../../shared/services/data-transforming.service';
-
 export class MovieDetails {
-  transform = new DataTransforming();
   constructor(
     public title: string,
     public vote: number,

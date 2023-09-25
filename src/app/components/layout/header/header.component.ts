@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavigationService } from '../../../shared/services/navigation-service.service';
+import { MenuStateService } from '../../../shared/services/menu-state.service';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +9,9 @@ import { NavigationService } from '../../../shared/services/navigation-service.s
 export class HeaderComponent {
   @Input() greyClass: boolean;
 
-  constructor(private navigationService: NavigationService) {}
+  constructor(private menuStateService: MenuStateService) {}
 
   onToggleMenu() {
-    this.navigationService.toggleMenu();
+    this.menuStateService.toggleMenu();
   }
 }

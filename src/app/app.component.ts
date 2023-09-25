@@ -1,42 +1,41 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { NavigationService } from './shared/services/navigation-service.service';
-import { ViewportService } from './shared/services/viewport-service.service';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { MenuStateService } from './shared/services/menu-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   shouldActiveMenu: boolean;
-  title = 'imdb_clone';
   shouldScrollToTop: boolean = false;
   height: any = 'auto';
+  subscriptions: Subscription = new Subscription();
 
-  constructor(
-    private navigationService: NavigationService,
-    private viewportService: ViewportService
-  ) {}
+  constructor(private menuStateService: MenuStateService) {}
 
   ngOnInit(): void {
-    this.navigationService.menuActiveChange.subscribe((activeMenu: boolean) => {
-      this.shouldActiveMenu = activeMenu;
-    });
-    this.viewportService.alertingMenu.subscribe((height: number) => {
-      this.height = height;
-    });
-    this.shouldActiveMenu = this.navigationService.menuActive;
+    this.subscriptions.add(
+      this.menuStateService.menuActiveChange.subscribe(
+        (activeMenu: boolean) => {
+          this.shouldActiveMenu = activeMenu;
+        }
+      )
+    );
+    this.shouldActiveMenu = this.menuStateService.menuActive;
   }
 
   @HostListener('window:scroll', [])
   onScroll(): void {
-    if (visualViewport.height < window.scrollY) {
-      this.shouldScrollToTop = true;
-    } else {
-      this.shouldScrollToTop = false;
-    }
+    this.shouldScrollToTop =
+      visualViewport.height < window.scrollY ? true : false;
   }
   onGoBack() {
     window.scroll({ top: 0 });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

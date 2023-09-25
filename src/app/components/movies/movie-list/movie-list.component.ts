@@ -4,9 +4,6 @@ import {
   HostListener,
   ViewChild,
   ElementRef,
-  AfterViewInit,
-  Output,
-  OnDestroy,
 } from '@angular/core';
 import { MoviesService } from '../movies.service';
 import { Movie } from './movie.model';
@@ -17,12 +14,11 @@ import { take } from 'rxjs';
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css'],
 })
-export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Output() movies: Movie[] = [];
+export class MovieListComponent implements OnInit {
+  movies: Movie[] = [];
   page = 1;
   @ViewChild('left') myReference: ElementRef;
   height: number;
-  private changes: MutationObserver;
 
   constructor(private movieService: MoviesService) {}
 
@@ -37,18 +33,8 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((res) => (this.movies = res));
   }
 
-  ngAfterViewInit(): void {
-    const tracked = document.querySelector('.tracked');
-    this.changes = new MutationObserver(() => {
-      if (this.myReference) {
-        this.height = this.myReference.nativeElement.offsetHeight;
-      }
-    });
-    this.changes.observe(tracked, {
-      attributes: true,
-      childList: true,
-      characterData: true,
-    });
+  onHeightChange(e: number) {
+    this.height = e;
   }
 
   @HostListener('window:scroll', [])
@@ -57,9 +43,5 @@ export class MovieListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.page++;
       this.getMovies();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.changes.disconnect();
   }
 }
