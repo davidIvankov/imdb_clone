@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MenuStateService } from 'src/app/shared/services/menu-state.service';
+import { MenuStateService } from '@shared/services/menu-state.service';
 
 @Component({
   selector: 'app-menu',

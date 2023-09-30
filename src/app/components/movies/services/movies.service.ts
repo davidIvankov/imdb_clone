@@ -4,7 +4,8 @@ import { Movie } from '../movie-list/movie.model';
 import { MovieDetails } from '../movie-details/movie-detailes.model';
 import { DataTransforming } from '../../../shared/services/data-transforming.service';
 import { map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment.development';
+import { environment } from '@env';
+
 
 
 @Injectable({ providedIn: 'root' })
