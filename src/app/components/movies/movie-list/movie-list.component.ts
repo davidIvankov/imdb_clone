@@ -5,7 +5,7 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { MoviesService } from '../movies.service';
+import { MoviesService } from '../services/movies.service';
 import { Movie } from './movie.model';
 import { take } from 'rxjs';
 
@@ -30,7 +30,7 @@ export class MovieListComponent implements OnInit {
     this.movieService
       .getMovies(this.page)
       .pipe(take(1))
-      .subscribe((res) => (this.movies = res));
+      .subscribe((res) => (this.movies.push(...res)));
   }
 
   onHeightChange(e: number) {

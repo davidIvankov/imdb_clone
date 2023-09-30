@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { MovieDetails } from './movie-detailes.model';
-import { MoviesService } from '../movies.service';
+import { MoviesService } from '../services/movies.service';
 import { take } from 'rxjs';
 import { HeightTrackingDirective } from 'src/app/shared/height-tracking.directive';
 
