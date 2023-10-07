@@ -2,36 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { MovieListComponent } from './movie-list/movie-list.component';
-import { MovieListItemComponent } from './movie-list/movie-list-item/movie-list-item.component';
-import { Routes, RouterModule } from '@angular/router';
-import { MovieComponent } from './movie/movie.component';
-import { SafePipe } from './safe.pipe';
-import { MenuComponent } from './header/menu/menu.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { MenuComponent } from './components/layout/header/menu/menu.component';
+import { AppRoutingModule } from './app-routing.module';
 
-
-const appRoutes: Routes = [
-{path:'', component: MovieListComponent},
-{path:'movie/:id', component: MovieComponent}
-]
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    MovieListComponent,
-    MovieListItemComponent,
-    MovieComponent,
-    SafePipe,
-    MenuComponent,
-    
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes),
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, HeaderComponent, MenuComponent],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

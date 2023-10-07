@@ -1,14 +1,14 @@
 <div class="item">
     <div class="close">
-        <a [href]="detailsMoviePath">
-            <img [src]="imgPath" [alt]="imgAlt">
+        <a [href]="'movie/'+ movie.id">
+            <img [src]="movie.poster" [alt]="movie.title + ' poster'">
         </a>
         <div class="info">
             <p>{{index}}.</p>
-            <a [href]="detailsMoviePath">
+            <a [href]="'movie/'+ movie.id">
                 <h3>{{movie.title}}</h3>
             </a>
-            <p>({{movie.release_date.slice(0,4)}})</p>
+            <p>({{movie.date}})</p>
         </div>
     </div>
     <div class="rating">

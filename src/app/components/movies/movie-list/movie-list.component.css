@@ -3,9 +3,11 @@ main {
     align-items: flex-start;
     justify-content: center;
     width: 100vw;
+    margin-bottom: 0;
     background-color: gray;
     color: rgb(44, 44, 44);
 }
+
 .left {
     display: flex;
     flex-direction: column;
