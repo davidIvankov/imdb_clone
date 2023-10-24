@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Movie } from "app/components/charts/movie.model";
+import { MovieDetails } from "app/components/titles/movie-detailes.model";
 
 @Injectable({providedIn: 'root'})
 
@@ -11,10 +13,37 @@ export class DataTransforming {
     const left = minutes % 60;
     const mins = left
     return `${hours}h ${mins}m`
-
   }
 
-   getVoteCount(votecount: number){ 
+  public transformValues(res: object): Movie {
+    return new Movie(
+      res['title'],
+      res['vote_average'],
+      this.getYear(res['release_date']),
+      this.getPosterUrl(res['poster_path']),
+      res['id']
+    );
+  }
+
+  public transformDetailedValues(res: object): MovieDetails {
+    return new MovieDetails(
+      res['title'],
+      res['vote_average'],
+      this.getYear(res['release_date']),
+      this.getPosterUrl(res['poster_path']),
+      this.getDuration(res['runtime']),
+      this.getVoteCount(res['vote_count']),
+      this.getTrailer(res['videos']['results']),
+      this.getWriters(res['credits']['crew']),
+      res['popularity'],
+      res['genres'],
+      res['overview'],
+      this.getActors(res['credits']['cast']),
+      this.getDirector(res['credits']['crew'])
+    );
+  }
+
+  private getVoteCount(votecount: number){ 
     if (votecount > 1000000){
       return `${votecount/1000000}M`
     } else if (votecount > 1000) {
@@ -22,11 +51,11 @@ export class DataTransforming {
     } else return `${votecount}`
   }
 
-  getYear(date: string){
+  private getYear(date: string){
     return date.slice(0,4)
   }
 
-   getTrailer(obj: object[]){
+  private getTrailer(obj: object[]){
     let videoUrl: string; 
     obj.forEach(video=>{
       let find;
@@ -41,10 +70,9 @@ export class DataTransforming {
       } else return
     })
     return videoUrl
-
   }
 
-  getDirector(obj: object[]){
+  private getDirector(obj: object[]){
     let director: string;
     let dirString: object[] = [];
     let num: number = 0;
@@ -59,11 +87,10 @@ export class DataTransforming {
         num = dir['popularity']
       } else  return
     })
-
     return director
   }
 
-  getWriters(obj: object[]){
+  private getWriters(obj: object[]){
     let dirString: string[] = [];
     obj.forEach((member: object)=>{
       if (member['known_for_department'] === 'Writing'){
@@ -71,19 +98,16 @@ export class DataTransforming {
         dirString.push(member['name'])
       }
     });
-
     return dirString
   }
 
-  getActors(obj: object[]){
+  private getActors(obj: object[]){
     let dirString: object[] = [];
     obj.forEach((member: object)=>{
       if (member['known_for_department'] === 'Acting'){
         dirString.push(member)
       }
     });
-  
    return dirString.map(finalist=>finalist['name']).slice(0, 3)
   }
-
 }

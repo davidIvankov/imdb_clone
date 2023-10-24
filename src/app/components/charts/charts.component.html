@@ -1,0 +1,56 @@
+<main [ngStyle]="{ height: height + 'px'}">
+  <section class="left" #left>
+    <div [ngSwitch]="searchQuery">
+      <div class="title" *ngSwitchCase="null">
+        <h2>IMDb Charts</h2>
+        <div>
+          <h1>IMDb Top Rated Movies</h1>
+          <p>IMDb Top as rated by regular IMDb voters.</p>
+          <hr class="lihr" />
+        </div>
+      </div>
+      <div class="title" *ngSwitchCase="''">
+        <div>
+          <h1>Search IMDb</h1>
+            <p>Search IMDb by typing a word or phrase in the search box at the top of this page.</p>
+          <hr class="lihr" />
+        </div>
+      </div>
+        <div class="title" *ngSwitchDefault>
+          <div>
+            <h1>Search "{{searchQuery}}"</h1>
+            <hr class="lihr" />
+          </div>
+        </div>
+      </div>
+    <div class="desc" *ngIf="searchQuery !== ''">
+      <p *ngIf="!searchQuery; else title">Rank & Title</p>
+      <ng-template #title>
+        <p>Title</p>
+      </ng-template>
+      <div>
+        <p>IMDb Rating</p>
+      </div>
+    </div>
+    <div appHeightTrackingDirective (heightChange)="onHeightChange($event)" *ngIf="searchQuery !== ''">
+      <app-charts-item
+        *ngFor="let movie of movies; let i = index"
+        [movie]="movie"
+        [index]="i + 1"
+      ></app-charts-item>
+    </div>
+  </section>
+  <section
+    class="right"
+    [ngStyle]="{ height: height + 'px'}"
+  >
+    <div class="inner">
+      <hr />
+      <h2>IMDb Charts</h2>
+      <nav>
+        <a routerLink="/chart/top" routerLinkActive="active-link">Top Rated Movies</a>
+      </nav>
+      <hr />
+    </div>
+  </section>
+</main>

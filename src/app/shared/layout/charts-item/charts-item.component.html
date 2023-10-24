@@ -1,0 +1,22 @@
+<div class="item">
+    <div class="close">
+        <a [href]="'title/'+ movie.id">
+            <img 
+                [src]="movie.poster" 
+                [alt]="movie.title + ' poster'"
+                [title]="movie.title + ' poster'" 
+            >
+        </a>
+        <div class="info">
+            <p>{{index}}.</p>
+            <a [href]="'title/'+ movie.id">
+                <h3>{{movie.title}}</h3>
+            </a>
+            <p>({{movie.date}})</p>
+        </div>
+    </div>
+    <div class="rating">
+        <i class="fa fa-star"></i>
+        <p>{{movie.vote}}</p>
+    </div>
+</div>

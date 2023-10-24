@@ -1,13 +1,27 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ChartsComponent } from './components/charts/charts.component';
+import { ErrorComponent } from '@shared/layout/error/error.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: '/movie', pathMatch: 'full' },
+  { path: '', redirectTo: '/chart/top', pathMatch: 'full' },
   {
-    path: 'movie',
-    loadChildren: () =>
-      import('./components/movies/movies.module').then((m) => m.MoviesModule),
+    path: 'title',
+    loadChildren: () => 
+    import('./components/titles/titles.module').then((m)=> m.TitlesModule)
   },
+  {
+    path: 'chart',
+    loadChildren: () =>
+      import('./components/charts/charts.module').then((m) => m.ChartsModule),
+  },
+  {
+    path: 'find',
+    title:'Find - IMDbClone',
+    component: ChartsComponent
+  },
+  {path: '**', component: ErrorComponent},
 ];
 
 @NgModule({

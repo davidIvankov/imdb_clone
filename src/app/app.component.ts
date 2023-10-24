@@ -1,6 +1,8 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MenuStateService } from './shared/services/menu-state.service';
 import { Subscription } from 'rxjs';
+import { Movie } from './components/charts/movie.model';
+import { SearchService } from '@shared/services/search.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,8 @@ export class AppComponent implements OnInit, OnDestroy {
   height: any = 'auto';
   subscriptions: Subscription = new Subscription();
 
-  constructor(private menuStateService: MenuStateService) {}
+  constructor(private menuStateService: MenuStateService) {
+  }
 
   ngOnInit(): void {
     this.subscriptions.add(

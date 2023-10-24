@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { SafePipe } from './safe.pipe';
 import { CommonModule } from '@angular/common';
-import { HeightTrackingDirective } from './height-tracking.directive';
+import { HeightTrackingDirective } from './directives/height-tracking.directive';
+import { FocusDetectorDirective } from './directives/focus-detector.directive';
 
 @NgModule({
-  declarations: [SafePipe, HeightTrackingDirective],
-  exports: [CommonModule, SafePipe, HeightTrackingDirective],
+  declarations: [SafePipe, HeightTrackingDirective, FocusDetectorDirective],
+  exports: [CommonModule, SafePipe, HeightTrackingDirective, FocusDetectorDirective],
 })
 export class SharedModule {}

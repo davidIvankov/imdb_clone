@@ -1,0 +1,25 @@
+
+    <div 
+        *ngIf="!isLoading && movies; else loading" 
+        (focusin)="onFocusIn()"
+        (focusout)="onFocusOut()"
+        class="outer"
+    >
+        <div (pointerout)="onLeave($event)" (pointerenter)="onEnterMouse()" class="container" >
+            <a 
+                *ngFor="let movie of movies.slice(0,7); let i = index" 
+                [href]="'title/'+ movie.id"
+                #searchList
+                (pointerenter)="trackHoveredIndex($event)"
+                class="items"
+            >
+                <app-charts-item [movie]="movie" [index]="i + 1"></app-charts-item>
+            </a>
+        </div>
+        <button (click)="onFind()" >See all results for "{{ searchQuery }}"</button>
+    </div>
+    <ng-template #loading>
+        <app-loading-spinner></app-loading-spinner>
+    </ng-template>
+
+
