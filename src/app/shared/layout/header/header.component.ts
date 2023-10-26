@@ -2,6 +2,7 @@ import {
   AfterViewInit, 
   Component, 
   ElementRef, 
+  HostListener, 
   Input, 
   OnDestroy, 
   Output, 
@@ -9,7 +10,7 @@ import {
 } from '@angular/core';
 import { MenuStateService } from '../../../shared/services/menu-state.service';
 import { SearchService } from '@shared/services/search.service';
-import { Movie } from 'app/components/charts/movie.model';
+import { ChartItem } from 'app/components/charts/chart-item.model';
 import { Subscription} from 'rxjs';
 import { Router } from '@angular/router';
 import { FocusDetectorDirective } from '@shared/directives/focus-detector.directive';
@@ -21,7 +22,7 @@ import { FocusDetectorDirective } from '@shared/directives/focus-detector.direct
 })
 export class HeaderComponent implements OnDestroy, AfterViewInit {
   @Input() greyClass: boolean;
-  @Output() movies: Movie[];
+  @Output() movies: ChartItem[];
   shouldDisplayDropdown: boolean;
   focusInDropdown: boolean = false;
   hoverOnDropdown: boolean = false;
@@ -36,13 +37,16 @@ export class HeaderComponent implements OnDestroy, AfterViewInit {
     private router: Router,
   ) {}
 
+
   ngAfterViewInit(): void {
    this.ip.isFocus.subscribe((e)=>{
       if (e) {
         this.shouldDisplayDropdown = this.searchInput.nativeElement.value ? true : false
         this.hoverOnDropdown = false
+        
       } else {
-        setTimeout(()=>this.shouldDisplayDropdown = this.focusInDropdown ? true : false, 1)
+        console.log(this.focusInDropdown)
+        setTimeout(()=>this.shouldDisplayDropdown = false, 200)
         
       }
    })
@@ -72,14 +76,11 @@ export class HeaderComponent implements OnDestroy, AfterViewInit {
 
   onClickSearch() {
     this.shouldDisplayDropdown = false;
-    this.searchQuery = this.searchInput.nativeElement.value;
     window.scroll({ top: 0 });
     this.router.navigate(['find'], {queryParams: {q: this.searchQuery}})
-    
   }
 
   onIsHovered(e: boolean) {
-    console.log(e)
     this.hoverOnDropdown = e;
   }
 

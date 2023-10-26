@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit, ViewChild, ElementRef, HostListener} from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { MoviesService } from "@shared/services/movies.service";
 import { SearchService } from "@shared/services/search.service";
 import { Observable, take } from "rxjs";
-import { Movie } from "./movie.model";
+import { ChartItem } from "./chart-item.model";
+
 
 @Component({
   selector: 'app-charts-list',
@@ -12,9 +13,11 @@ import { Movie } from "./movie.model";
 })
 
 export class ChartsComponent implements OnInit {
-  movies: Movie[] = [];
+  movies: ChartItem[] = [];
+  isTvShows: boolean;
   page = 1;
   @ViewChild('left') myReference: ElementRef;
+  finished: boolean;
   height: number;
   searchQuery: string;
   isFindRoute: boolean = false; 
@@ -22,29 +25,30 @@ export class ChartsComponent implements OnInit {
   constructor(
     private movieService: MoviesService,
     private route: ActivatedRoute,
-    private searchService: SearchService
+    private searchService: SearchService,
     ) {
     this.route.queryParams.subscribe(p => {
       this.searchQuery = p['q'];
       this.page = 1
-      this.getMovies();
     });
-  }
-
-  ngOnInit() {
-    this.getMovies();
     
-  }
+    }
+    ngOnInit(): void {
+      this.finished = false
+      this.route.url.subscribe((a)=> this.isTvShows =  a[0].path === 'toptv' ? true : false )
+      this.getContent()
+    }
 
-  private getMovies() {
-    let listObs: Observable<Movie[]>;
+  private getContent() {
+    let listObs: Observable<ChartItem[]>;
     listObs = this.searchQuery 
     ? this.searchService.getAll(this.searchQuery, this.page)
-    : this.movieService.getMovies(this.page)
+    : this.movieService.get(this.page, this.isTvShows)
         
     listObs
       .pipe(take(1))
       .subscribe((res) =>{ 
+        this.finished = true
         if (this.page === 1) this.movies = res;
         else this.movies.push(...res);
     });
@@ -58,7 +62,7 @@ export class ChartsComponent implements OnInit {
   onScroll(): void {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       this.page++;
-      this.getMovies();
+      this.getContent();
     }
   }
 }

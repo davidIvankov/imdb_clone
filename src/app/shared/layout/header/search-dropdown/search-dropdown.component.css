@@ -29,15 +29,14 @@
     color:white;
   }
 
+.container > a:first-child{
+border-radius: 5px 5px 0 0;
+}
 
+a {
+text-decoration: none;
+}
 
-  .container > a:first-child{
-    border-radius: 5px 5px 0 0;
-  }
-
-  a {
-    text-decoration: none;
-  }
 button {
     background-color: rgb(110, 107, 107);
     font-size: .9rem;
@@ -52,12 +51,12 @@ button:hover {
     cursor: pointer
 }
 
-
 .container a:hover, .hovered{
     background-color: rgb(75, 73, 73);
     cursor: pointer;
     transition: background-color ease-in-out
 }
+
 a {
     transition: all ease-in-out;
 }

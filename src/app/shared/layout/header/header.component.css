@@ -3,9 +3,11 @@
     fill: #DBA506;
     margin-left: 4vw;
 }
+
 a {
     background-color: aliceblue;
 }
+
 header {
     width: 100vw;
     height: 4vw;
@@ -16,7 +18,6 @@ header {
     background-color: black;
     gap: .5vw;
 }
-
 
 .searchDiv {
     display: flex;
@@ -75,7 +76,6 @@ button {
 label {
     background-color: aliceblue;
 }
-
 
 button:hover{
     background-color:#202020;

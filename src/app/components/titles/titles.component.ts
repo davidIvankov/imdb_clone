@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { MovieDetails } from './movie-detailes.model';
+import { ItemDetailes } from './item-detailes.model';
 import { MoviesService } from '../../shared/services/movies.service';
-import { take } from 'rxjs';
 import { HeightTrackingDirective } from '@shared/directives/height-tracking.directive';
 
 @Component({
@@ -13,29 +12,36 @@ import { HeightTrackingDirective } from '@shared/directives/height-tracking.dire
 })
 export class TitlesComponent implements OnInit {
   height: number;
-  movieDetails: MovieDetails;
+  movieDetails: ItemDetailes;
   private id: number;
   finished: boolean;
+  isTvShow: boolean = false;
   @ViewChild(HeightTrackingDirective) trackedEl: HeightTrackingDirective;
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MoviesService,
-    private titleService: Title
-  ) {}
+    private titleService: Title,
+  ) {
+    this.route.queryParams.subscribe((e: Params)=>{
+      this.isTvShow = e['TvShow'] === 'true'
+    })
+  }
+  
+   
   ngOnInit(): void {
    this.route.params.subscribe(e=>{
+    window.scroll({ top: 0 });
     this.id = e['id']
     this.movieService
-      .getDetailedMovie(this.id)
-      .pipe(take(1))
+      .getDetailes(this.id, this.isTvShow)
       .subscribe((data) => {
         this.movieDetails = data;
         this.finished = true
-        
         this.titleService.setTitle(this.movieDetails.title);
       },(error)=> this.finished = true);
    })
+  
 
   }
   onHeightChange(e: number) {

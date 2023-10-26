@@ -1,37 +1,29 @@
 import { Injectable } from "@angular/core";
-import { Movie } from "app/components/charts/movie.model";
-import { MovieDetails } from "app/components/titles/movie-detailes.model";
+import { ChartItem } from "app/components/charts/chart-item.model";
+import { ItemDetailes } from "app/components/titles/item-detailes.model";
 
 @Injectable({providedIn: 'root'})
 
 export class DataTransforming {
-    getPosterUrl(poster: string) {
-        return `https://image.tmdb.org/t/p/w500${poster}`
-    }
-     getDuration(minutes: number){
-    const hours = Math.trunc(minutes/60);
-    const left = minutes % 60;
-    const mins = left
-    return `${hours}h ${mins}m`
-  }
 
-  public transformValues(res: object): Movie {
-    return new Movie(
-      res['title'],
+  public transformValues(res: object): ChartItem {
+    return new ChartItem(
+      res['title'] ? res['title']: res['name'],
       res['vote_average'],
-      this.getYear(res['release_date']),
+      this.getYear(res),
       this.getPosterUrl(res['poster_path']),
-      res['id']
+      res['id'],
+      res['title'] ? false : true
     );
   }
 
-  public transformDetailedValues(res: object): MovieDetails {
-    return new MovieDetails(
-      res['title'],
+  public transformDetailedValues(res: object): ItemDetailes {
+    return new ItemDetailes(
+      res['title'] ? res['title'] : res['name'],
       res['vote_average'],
-      this.getYear(res['release_date']),
+      this.getYear(res),
       this.getPosterUrl(res['poster_path']),
-      this.getDuration(res['runtime']),
+      this.getDuration(res),
       this.getVoteCount(res['vote_count']),
       this.getTrailer(res['videos']['results']),
       this.getWriters(res['credits']['crew']),
@@ -43,6 +35,24 @@ export class DataTransforming {
     );
   }
 
+  private getPosterUrl(poster: string) {
+        return `https://image.tmdb.org/t/p/w500${poster}`
+  }
+
+  private getDuration(res){
+    if (res['runtime']) {
+      const minutes = res['runtime']
+
+      const hours = Math.trunc(minutes/60);
+      const left = minutes % 60;
+      const mins = left
+      return `${hours}h ${mins}m`
+    } else {
+      return res['last_air_date'].slice(0, 4);
+    }
+
+  }
+
   private getVoteCount(votecount: number){ 
     if (votecount > 1000000){
       return `${votecount/1000000}M`
@@ -51,8 +61,10 @@ export class DataTransforming {
     } else return `${votecount}`
   }
 
-  private getYear(date: string){
-    return date.slice(0,4)
+  private getYear(obj: any){
+    if (obj['release_date']) return obj['release_date'].slice(0,4) 
+    if (obj['first_air_date']) return obj['first_air_date'].slice(0,4)
+    else console.log(obj)
   }
 
   private getTrailer(obj: object[]){

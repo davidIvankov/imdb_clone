@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Movie } from '../../../components/charts/movie.model';
+import { ChartItem } from '../../../components/charts/chart-item.model';
 
 @Component({
   selector: 'app-charts-item',
@@ -7,6 +7,7 @@ import { Movie } from '../../../components/charts/movie.model';
   styleUrls: ['./charts-item.component.css'],
 })
 export class ChartsItemComponent {
-  @Input() movie: Movie;
+  @Input() movie: ChartItem;
   @Input() index: number;
+
 }

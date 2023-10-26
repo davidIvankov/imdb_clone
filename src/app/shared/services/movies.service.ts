@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Movie } from '../../components/charts/movie.model';
+import { ChartItem } from '../../components/charts/chart-item.model';
 import { DataTransforming } from './data-transforming.service';
-import { Subject, map } from 'rxjs';
+import { Observable, Subject, map, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MoviesService {
-  error = new Subject<boolean>()
 
   constructor(private http: HttpClient, private transform: DataTransforming) {}
-  getMovies(page: number) {
-    return this.http
-      .get<Movie[]>('https://api.themoviedb.org/3//movie/top_rated', {
-        params: new HttpParams().set('page', page),
-      })
+  public get(page: number, tvSeries: boolean) {
+    const obs = tvSeries ? this.getTvShows(page) : this.getMovies(page)
+    return obs  
       .pipe(
         map((res) => {
           const list: [] = res['results'];
@@ -24,17 +21,46 @@ export class MoviesService {
       );
   }
 
-  getDetailedMovie(id: number) {
+  public getDetailes(id: number, isTvShow: boolean) {
+    const obs = isTvShow ? this.getTvShowDetailes(id) : this.getMovieDetailes(id);
+
+    return obs
+    .pipe(
+      map((res) => {
+        return this.transform.transformDetailedValues(res);
+      }),
+    );
+
+  }
+
+  private getTvShows(page: number = 1) {
+    return this.http
+      .get<ChartItem[]>('https://api.themoviedb.org/3/tv/top_rated', {
+        params: new HttpParams().set('page', page)
+      })
+  }
+
+  private getMovies(page: number = 1) {
+    return this.http
+      .get<ChartItem[]>('https://api.themoviedb.org/3//movie/top_rated', {
+        params: new HttpParams().set('page', page),
+      })
+  }
+
+  private getMovieDetailes(id: number) {
     return this.http
       .get(`https://api.themoviedb.org/3/movie/${id}`, {
         params: new HttpParams()
           .set('append_to_response', 'videos,images,credits'),
       })
-      .pipe(
-        map((res) => {
-          return this.transform.transformDetailedValues(res);
-        }),
-      );
   }
 
+  private getTvShowDetailes(id: number) {
+    return this.http
+      .get(`https://api.themoviedb.org/3/tv/${id}`, {
+        params: new HttpParams()
+          .set('append_to_response', 'videos,images,credits'),
+      })
+
+  }
 }

@@ -15,11 +15,16 @@
       <div class="initInfo">
         <div class="header">
           <h2>{{ movieDetails.title }}</h2>
-          <div class="little">
+          <div class="little" *ngIf="!isTvShow ; else TvShow">
             <h3>{{ movieDetails.date }}</h3>
             <span>&#183;</span>
             <h3>{{ movieDetails.duration }}</h3>
           </div>
+          <ng-template #TvShow>
+            <div class="little" >
+              <h3 class="tvDuration">{{ movieDetails.date }} - {{ movieDetails.duration }}</h3>
+            </div>
+          </ng-template>
         </div>
         <div class="stats">
           <div class="pop">

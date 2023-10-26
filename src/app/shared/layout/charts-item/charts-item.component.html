@@ -1,6 +1,6 @@
 <div class="item">
     <div class="close">
-        <a [href]="'title/'+ movie.id">
+        <a [routerLink]="['/title/'+ movie.id]" [queryParams]="{TvShow: movie.isTvShow}">
             <img 
                 [src]="movie.poster" 
                 [alt]="movie.title + ' poster'"
@@ -9,7 +9,7 @@
         </a>
         <div class="info">
             <p>{{index}}.</p>
-            <a [href]="'title/'+ movie.id">
+            <a [routerLink]="['/title/'+ movie.id]" [queryParams]="{TvShow: movie.isTvShow}">
                 <h3>{{movie.title}}</h3>
             </a>
             <p>({{movie.date}})</p>

@@ -7,6 +7,7 @@ import { SharedModule } from "@shared/shared.module";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { ChartsItemComponent } from "./charts-item/charts-item.component";
 import { CoreModule } from "app/core.module";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,7 @@ import { CoreModule } from "app/core.module";
         LoadingSpinnerComponent,
         ChartsItemComponent
     ],
-    imports: [ SharedModule, CoreModule],
+    imports: [ SharedModule, CoreModule, RouterModule],
     exports: [
         MenuComponent, 
         HeaderComponent, 

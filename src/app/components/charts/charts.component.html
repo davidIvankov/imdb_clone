@@ -4,7 +4,7 @@
       <div class="title" *ngSwitchCase="null">
         <h2>IMDb Charts</h2>
         <div>
-          <h1>IMDb Top Rated Movies</h1>
+          <h1>{{isTvShows ? 'Top Rated TV Shows':'Top Rated Movies'}}</h1>
           <p>IMDb Top as rated by regular IMDb voters.</p>
           <hr class="lihr" />
         </div>
@@ -33,11 +33,16 @@
       </div>
     </div>
     <div appHeightTrackingDirective (heightChange)="onHeightChange($event)" *ngIf="searchQuery !== ''">
-      <app-charts-item
-        *ngFor="let movie of movies; let i = index"
-        [movie]="movie"
-        [index]="i + 1"
-      ></app-charts-item>
+      <div *ngIf="finished; else loadingSpinner">
+        <app-charts-item
+          *ngFor="let movie of movies; let i = index"
+          [movie]="movie"
+          [index]="i + 1"
+        ></app-charts-item>
+      </div>
+      <ng-template #loadingSpinner>
+        <app-loading-spinner></app-loading-spinner>
+      </ng-template>
     </div>
   </section>
   <section
@@ -49,6 +54,7 @@
       <h2>IMDb Charts</h2>
       <nav>
         <a routerLink="/chart/top" routerLinkActive="active-link">Top Rated Movies</a>
+        <a routerLink="/chart/toptv" routerLinkActive="active-link">Top Rated TV Shows</a>
       </nav>
       <hr />
     </div>

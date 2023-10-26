@@ -1,14 +1,14 @@
 
     <div 
         *ngIf="!isLoading && movies; else loading" 
-        (focusin)="onFocusIn()"
-        (focusout)="onFocusOut()"
         class="outer"
     >
-        <div (pointerout)="onLeave($event)" (pointerenter)="onEnterMouse()" class="container" >
+        <div (pointerout)="onLeave($event)" (pointerenter)="onEnterMouse()" class="container"(focusin)="onFocusIn()"
+        (focusout)="onFocusOut()" >
             <a 
                 *ngFor="let movie of movies.slice(0,7); let i = index" 
-                [href]="'title/'+ movie.id"
+                [routerLink]="['/title/'+ movie.id]"
+                [queryParams]="{TvShow: movie.isTvShow}"
                 #searchList
                 (pointerenter)="trackHoveredIndex($event)"
                 class="items"

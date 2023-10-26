@@ -1,6 +1,6 @@
-import { Movie } from "../charts/movie.model";
 
-export class MovieDetails {
+
+export class ItemDetailes {
   constructor(
     public title: string,
     public vote: number,

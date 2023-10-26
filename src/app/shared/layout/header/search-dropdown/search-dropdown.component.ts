@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from '@shared/services/search.service';
-import { Movie } from 'app/components/charts/movie.model';
+import { ChartItem } from 'app/components/charts/chart-item.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./search-dropdown.component.css']
 })
 export class SearchDropdownComponent implements OnDestroy {
-  @Input() movies: Movie[]; 
+  @Input() movies: ChartItem[]; 
   @Input() searchQuery: string;
   @Output() find = new EventEmitter<void>();
   @Output() focused = new EventEmitter<boolean>();
@@ -54,16 +54,17 @@ export class SearchDropdownComponent implements OnDestroy {
   }
 
   private enterKeyHandling() {
-    window.scroll({ top: 0 });
         
         if (!this.selectedItem){ 
           this.find.emit()
           this.isHovered.emit(false)
         }
         else {
+          
         this.router.navigate(
-          [this.selectedItem.nativeElement['href'].slice(21)], 
-          {relativeTo: this.route}
+          [this.selectedItem.nativeElement.attributes['ng-reflect-router-link'].value], 
+          {queryParams: {TvShow: this.movies[this.index].isTvShow}, relativeTo: this.route},
+  
         )
         this.shouldDestroyComponent.emit()
         }
