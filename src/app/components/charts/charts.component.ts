@@ -26,16 +26,16 @@ export class ChartsComponent implements OnInit {
     private movieService: MoviesService,
     private route: ActivatedRoute,
     private searchService: SearchService,
-    ) {
-    this.route.queryParams.subscribe(p => {
-      this.searchQuery = p['q'];
-      this.page = 1
-    });
-    
-    }
+    ) {}
     ngOnInit(): void {
       this.finished = false
       this.route.url.subscribe((a)=> this.isTvShows =  a[0].path === 'toptv' ? true : false )
+      this.route.queryParamMap.subscribe((p) => {
+        console.log(p.get('q'))
+        this.searchQuery = p.get('q')
+        this.page = 1
+        if (this.searchQuery) this.getContent()
+      });
       this.getContent()
     }
 

@@ -62,9 +62,8 @@ export class SearchDropdownComponent implements OnDestroy {
         else {
           
         this.router.navigate(
-          [this.selectedItem.nativeElement.attributes['ng-reflect-router-link'].value], 
+          ['/title/'+ this.movies[this.index].id], 
           {queryParams: {TvShow: this.movies[this.index].isTvShow}, relativeTo: this.route},
-  
         )
         this.shouldDestroyComponent.emit()
         }

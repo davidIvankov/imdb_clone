@@ -43,11 +43,8 @@ export class HeaderComponent implements OnDestroy, AfterViewInit {
       if (e) {
         this.shouldDisplayDropdown = this.searchInput.nativeElement.value ? true : false
         this.hoverOnDropdown = false
-        
       } else {
-        console.log(this.focusInDropdown)
         setTimeout(()=>this.shouldDisplayDropdown = false, 200)
-        
       }
    })
   }
