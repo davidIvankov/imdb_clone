@@ -1,4 +1,4 @@
 # ImdbClone
-## site: https://davidivankov.github.io/imdb_clone/ 
+## site: https://imdb-clone-ab284.web.app
 
 
