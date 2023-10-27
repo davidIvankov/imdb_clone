@@ -13,7 +13,8 @@ export class AppComponent implements OnInit, OnDestroy {
   height: any = 'auto';
   subscriptions: Subscription = new Subscription();
 
-  constructor(private menuStateService: MenuStateService) {}
+  constructor(private menuStateService: MenuStateService) {
+  }
 
   ngOnInit(): void {
     this.subscriptions.add(

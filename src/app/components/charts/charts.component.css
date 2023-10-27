@@ -1,0 +1,138 @@
+main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100vw;
+    margin-bottom: 0;
+    background-color: gray;
+    color: rgb(44, 44, 44);
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: white;
+    align-items: center;
+    min-height: 140vh;
+}
+.title {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2vw;
+    width: 100%;
+    align-items: flex-start;
+    
+}
+.lihr {
+    width: 50vw;
+}
+hr {
+    width: 100%;
+}
+.inner {
+    width: 80%;
+}
+
+.title > h2, .inner>h2 {
+    font-size: 1.2rem;
+    font-weight: 100;
+    margin-bottom: -1.5vw;
+}
+
+ul {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+}
+
+nav {
+    margin-top: 2.5vw;
+    margin-bottom: 2vw;
+    display: flex;
+    flex-direction: column;
+}
+nav a {
+    text-decoration: none;
+    font-size: .9rem;
+    width:max-content
+}
+
+:host ::ng-deep app-loading-spinner .container{
+    background-color: inherit;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    width: 55vw;
+    margin-left: -5vw;
+    height: min-content;
+    border-radius: 5px;
+}
+:host ::ng-deep app-loading-spinner .container .lds-ellipsis {
+    transform: rotate(90deg);
+}
+
+
+:host ::ng-deep app-loading-spinner .container .lds-ellipsis div {
+    background: rgb(48, 45, 45);
+    width: 3vw;
+    height: 1vw;
+}
+.active-link {
+    border-radius: 15px ;
+-webkit-box-shadow: -1px 2px 3px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 2px 3px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 2px 3px -1px rgba(0, 0, 0, 0.75);
+}
+.filler {
+    height:5.5vw
+}
+nav a:hover{
+    text-decoration: underline;
+}
+
+.inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 5vw;
+}
+.title > div > h1 {
+    height: 0.7vw;
+    font-size: 2rem;
+    font-weight: 500;
+}
+.title>div>p{
+    font-size: .8rem;
+    color: rgb(75, 74, 74);
+}
+.desc {
+    width: 76%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 1vw;
+    margin-top: 4vw;
+    font-size: .9rem;
+    font-weight: 800;
+    color: rgb(71, 70, 70);
+}
+
+.desc > div > p {
+    width: 5vw;
+    line-height: 1vw;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    background-color: rgb(224, 222, 230);
+    min-height: 140vh;
+
+}

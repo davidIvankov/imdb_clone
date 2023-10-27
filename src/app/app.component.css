@@ -11,10 +11,19 @@
 .up {
     height: .9vw;
     transform: rotate(90deg);
+
 }
 
 .active {
     transform: translateY(-3vh);
+}
+
+.back {
+    z-index: 2;
+}
+
+.back:hover {
+    cursor: pointer;
 }
 
 .visible {

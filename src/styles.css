@@ -5,6 +5,7 @@ html {
 body :only-child{
     height: 100%;
 }
+
 body {
     position: absolute;
     padding: 0;

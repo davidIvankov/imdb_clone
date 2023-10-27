@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 export class MenuStateService {
   menuActiveChange = new Subject<boolean>();
   menuActive: boolean = false;
-  constructor() {}
 
   toggleMenu() {
     this.menuActive = !this.menuActive;

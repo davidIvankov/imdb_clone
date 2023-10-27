@@ -1,0 +1,98 @@
+menu {
+    width: 100vw;
+    height: 103vh;
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+}
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.logo {
+    height: 8vw;
+    fill: #DBA506;
+    margin-left: 15vw;
+
+}
+a {
+    text-decoration: none;
+}
+
+menu header {
+    background-color: inherit;
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 3vw;
+
+}
+
+menu header img {
+    height: 6vw;
+    color: #DBA506;
+    margin-left: 10vw;
+
+}
+
+.x-button {
+    background-color: #DBA506;
+    border-radius: 50%;
+    height: 4vw;
+    width: 4vw;
+    margin-right: 10vw;
+}
+
+.icon {
+    height: 1.2vw;
+}
+
+.x-button:hover {
+    background-color: #DBA506;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5vw;
+
+}
+
+.title i {
+    color: #DBA506;
+}
+
+section {
+    width: 100vw;
+    display: flex;
+    align-items: baseline;
+    margin-left: 6.5vw;
+    justify-content: left;
+    height: 100vh;
+    margin-top: 2.5vw;
+    color: white;
+
+}
+section nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: baseline;
+    width: 25%;
+}
+nav a {
+    margin-left: 5vw;
+}
+
+.link {
+    color: white;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

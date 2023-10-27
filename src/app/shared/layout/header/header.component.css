@@ -1,0 +1,84 @@
+.logo {
+    height: 3vw;
+    fill: #DBA506;
+    margin-left: 4vw;
+}
+
+a {
+    background-color: aliceblue;
+}
+
+header {
+    width: 100vw;
+    height: 4vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0;
+    background-color: black;
+    gap: .5vw;
+}
+
+.searchDiv {
+    display: flex;
+    width: 55vw;
+    background-color: white;
+    height: 2.5vw;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchDiv:focus-within {
+    border: 2px solid #DBA506;
+}
+
+.searchDiv input {
+    width: 50vw;
+    border-radius: 5px;
+    border: none;
+    
+}
+
+.searchDiv button {
+    height: 1.5vw;
+    width: min-content;
+    margin-right: .5vw
+}
+
+.searchDiv button svg {
+    fill: gray;
+}
+.searchDiv button:hover {
+    background-color: white;
+}
+
+.searchDiv input:focus {
+    outline: none;
+}
+
+button {
+    border: none;
+    background-color: inherit;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5vw;
+    height: 3vw;
+    font-size: 1.1vw;
+    text-align: center;
+    letter-spacing: .1vw;
+    border-radius: 15px;
+    width: 8vw;
+}
+
+label {
+    background-color: aliceblue;
+}
+
+button:hover{
+    background-color:#202020;
+    cursor: pointer;
+}
+
