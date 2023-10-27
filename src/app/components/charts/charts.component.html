@@ -32,8 +32,8 @@
         <p>IMDb Rating</p>
       </div>
     </div>
-    <div appHeightTrackingDirective (heightChange)="onHeightChange($event)" *ngIf="searchQuery !== ''">
-      <div *ngIf="finished; else loadingSpinner">
+    <div *ngIf="searchQuery !== ''">
+      <div *ngIf="finished; else loadingSpinner" appHeightTrackingDirective (heightChange)="onHeightChange($event)">
         <app-charts-item
           *ngFor="let movie of movies; let i = index"
           [movie]="movie"
